@@ -84,6 +84,7 @@ Run these in order from the project root, with the virtual environment active.
 
 ## Project structure
 
+```
 nesma/
 ├── data/
 │   ├── raw/              original xlsx, untouched
@@ -99,6 +100,7 @@ nesma/
 │   └── NP_AI_Engineer_Assessment.docx
 ├── requirements.txt
 └── README.md
+```
 
 ## Development notes
 
