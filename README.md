@@ -12,7 +12,7 @@ Built as a take home assessment. Focus was on clarity over complexity, as reques
 4. Those records are passed to a local LLM (Ollama, llama3), which generates an answer grounded in that context
 5. A FastAPI endpoint wraps this whole flow
 
-See `docs/architecture-diagram.png` and Part 1 of the report for the full picture.
+See `docs/architecture-diagram.png` and Part 1 of `docs/Report.pdf` for the full picture.
 
 ## Tech stack and why
 
@@ -26,81 +26,91 @@ Note: torch is pinned to 2.2.2 in `requirements.txt` because this project was bu
 ## Setup
 
 1. Clone the repo and enter the folder
+
 ```bash
-   git clone 
-   cd nesma
+git clone https://github.com/Maryamalakkas/employee-assistant-rag.git
+cd employee-assistant-rag
 ```
 
 2. Create and activate a virtual environment
+
 ```bash
-   python3 -m venv venv
-   source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 3. Install dependencies
+
 ```bash
-   pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 4. Make sure Ollama is installed and pull the model
+
 ```bash
-   ollama pull llama3
+ollama pull llama3
 ```
 
-5. Place the dataset at `data/raw/employee_np.xlsx` (already included in this repo)
+5. The dataset is already included at `data/raw/employee_np.xlsx`, no download needed
 
 ## Running it
 
 Run these in order from the project root, with the virtual environment active.
 
 1. Process the raw data into text chunks
+
 ```bash
-   python3 src/ingest.py
+python3 src/ingest.py
 ```
 
 2. Generate embeddings and build the vector store
+
 ```bash
-   python3 src/embed.py
+python3 src/embed.py
 ```
 
 3. (Optional) Test retrieval and answer generation directly from the terminal
+
 ```bash
-   python3 src/query.py
+python3 src/query.py
 ```
 
 4. Start the API
+
 ```bash
-   uvicorn src.api:app --reload
+uvicorn src.api:app --reload
 ```
 
 5. Ask a question
+
 ```bash
-   curl -X POST http://127.0.0.1:8000/ask \
-     -H "Content-Type: application/json" \
-     -d '{"question": "Who works in the HR department?"}'
+curl -X POST http://127.0.0.1:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Who works in the HR department?"}'
 ```
 
-   Or open `http://127.0.0.1:8000/docs` in a browser for an interactive interface.
+Or open `http://127.0.0.1:8000/docs` in a browser for an interactive interface.
 
 ## Project structure
-
-```
+'
 nesma/
 ├── data/
-│   ├── raw/              original xlsx, untouched
-│   └── processed/        cleaned JSON chunks and vector store
+│   ├── raw/                       original xlsx, untouched
+│   └── processed/                 cleaned JSON chunks and vector store
 ├── src/
-│   ├── ingest.py          Part 2: load, clean, convert rows to text
-│   ├── embed.py            Part 3: generate embeddings, build vector store
-│   ├── query.py            Part 3: retrieval and answer generation logic
-│   ├── api.py                Part 4: FastAPI app
+│   ├── ingest.py                  Part 2: load, clean, convert rows to text
+│   ├── embed.py                   Part 3: generate embeddings, build vector store
+│   ├── query.py                   Part 3: retrieval and answer generation logic
+│   ├── api.py                     Part 4: FastAPI app
 │   └── scratch/
-│       └── retrieval_only.py   earlier draft, kept for reference
+│       └── retrieval_only.py      earlier draft, kept for reference
 ├── docs/
-│   └── NP_AI_Engineer_Assessment.docx
+│   ├── NP_AI_Engineer_Assessment.docx
+│   ├── Report.pdf
+│   └── architecture-diagram.png
 ├── requirements.txt
 └── README.md
-```
+'
 
 ## Development notes
 
@@ -108,4 +118,4 @@ nesma/
 
 ## Known limitations
 
-Full discussion is in the report, but briefly: this uses pure semantic search, which is strong for meaning based questions but weak on exact name lookups and "list all" style queries. See Part 5 of the report for the full breakdown and possible improvements.
+Full discussion is in the report, but briefly: this uses pure semantic search, which is strong for meaning based questions but weak on exact name lookups and "list all" style queries. See Part 5 of `docs/Report.pdf` for the full breakdown and possible improvements.
