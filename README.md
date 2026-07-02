@@ -106,7 +106,7 @@ nesma/
 │   └── scratch/
 │       └── retrieval_only.py      earlier draft, kept for reference
 ├── docs/
-│   ├── NP_AI_Assessment.docx
+│   ├── NP_AI_Engineer_Assessment.docx
 │   ├── Report.pdf
 │   └── architecture-diagram.png
 ├── requirements.txt
