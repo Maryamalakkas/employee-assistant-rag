@@ -92,7 +92,8 @@ curl -X POST http://127.0.0.1:8000/ask \
 Or open `http://127.0.0.1:8000/docs` in a browser for an interactive interface.
 
 ## Project structure
-'
+
+```
 nesma/
 ├── data/
 │   ├── raw/                       original xlsx, untouched
@@ -105,12 +106,12 @@ nesma/
 │   └── scratch/
 │       └── retrieval_only.py      earlier draft, kept for reference
 ├── docs/
-│   ├── NP_AI_Engineer_Assessment.docx
+│   ├── NP_AI_Assessment.docx
 │   ├── Report.pdf
 │   └── architecture-diagram.png
 ├── requirements.txt
 └── README.md
-'
+```
 
 ## Development notes
 
