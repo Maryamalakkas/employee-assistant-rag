@@ -36,7 +36,7 @@ def ask_question(request: QuestionRequest):
         # let our own 404 above pass through as-is
         raise
     except Exception as e:
-        # anything unexpected (ollama down, chromadb issue, etc) becomes a clean 500 instead of a crash
+        # anything unexpected such asollama down chromadb issue becomes a clean 500 instead of a crash
         raise HTTPException(status_code=500, detail=f"Something went wrong: {str(e)}")
 
 
